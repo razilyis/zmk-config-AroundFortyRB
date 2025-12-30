@@ -70,7 +70,7 @@
 &kp Q             &kp W      &kp E         &kp R         &kp T                          &kp Y             &kp U    &kp I        &kp O       &lt 6 P
 &kp A             &kp S      &kp D         &kp F         &kp G                          &kp H             &kp J    &kp K        &kp L       &kp MINUS
 &mt LEFT_SHIFT Z  &kp X      &kp C         &kp V         &kp B             &kp BSPC     &kp N             &kp M    &mkp MB1     &mkp MB2    &mkp MB3
-&kp LCTRL         &kp RSHFT  &kp LEFT_ALT  &kp LEFT_GUI  &lt 6 LANGUAGE_2  &lt 2 SPACE  &lt 5 LANGUAGE_1  &kp DEL  &lt 6 SPACE  &lt 7 HASH  &kp ENTER
+&kp LCTRL         &kp RSHFT  &kp LEFT_ALT  &kp LEFT_GUI  &lt 6 LANGUAGE_2  &lt 2 SPACE  &lt 4 LANGUAGE_1  &kp DEL  &lt 6 SPACE  &lt 7 HASH  &kp ENTER
             >;
         };
 
@@ -107,10 +107,10 @@
 
         Win-Common_Layer {
             bindings = <
-&kp ESCAPE      &trans        &trans       &kp LG(UP_ARROW)    &trans                       &kp LC(W)          &kp LA(LEFT_ARROW)  &mkp MB3        &kp LA(RIGHT_ARROW)  &kp HOME
-&kp TAB         &kp LEFT_GUI  &kp LS(TAB)  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)          &kp LC(PAGE_UP)    &mkp MB1            &kp UP_ARROW    &mkp MB2             &kp PAGE_UP
-&kp LEFT_SHIFT  &trans        &trans       &kp LG(DOWN_ARROW)  &trans               &trans  &kp LC(PAGE_DOWN)  &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW      &kp PAGE_DOWN
-&kp LCTRL       &trans        &trans       &trans              &trans               &trans  &trans             &kp LC(T)           &trans          &trans               &kp END
+&kp ESCAPE      &trans        &trans       &kp LG(UP_ARROW)    &trans                       &trans         &kp HOME            &trans          &kp END          &kp DEL
+&kp TAB         &kp LEFT_GUI  &kp LS(TAB)  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)          &kp PAGE_UP    &kp LA(LEFT_ARROW)  &kp UP_ARROW    &kp LA(RIGHT)    &kp BACKSPACE
+&kp LEFT_SHIFT  &trans        &trans       &kp LG(DOWN_ARROW)  &trans               &trans  &kp PAGE_DOWN  &kp LEFT_ARROW      &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
+&kp LCTRL       &trans        &trans       &trans              &trans               &trans  &trans         &trans              &trans          &trans           &trans
             >;
 
             sensor-bindings = <&scroll_up_down>;
