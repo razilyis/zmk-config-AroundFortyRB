@@ -30,6 +30,11 @@
             bindings = <&kp ESCAPE>;
             key-positions = <0 1>;
         };
+
+        scroll_Layer {
+            bindings = <&to 6>;
+            key-positions = <28 29>;
+        };
     };
 
     macros {
