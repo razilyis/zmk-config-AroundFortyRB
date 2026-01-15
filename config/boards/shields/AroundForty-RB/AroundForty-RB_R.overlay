@@ -1,4 +1,6 @@
 #include "AroundForty-RB.dtsi"
+#include <dt-bindings/zmk/pointing.h>
+#include <input/processors.dtsi>
 
 
 &default_transform {
@@ -19,7 +21,11 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
+        input-processors = <&zip_xy_scaler 1 1>;
+        scroll-layer {
+            layers = <6>;
+            input-processors = <&zip_xy_to_scroll_mapper>;
+        };
     };
 };
 
@@ -58,9 +64,6 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        //automouse-layer = <8>;
-        scroll-layers = <6>;
-
     };
 };
 
