@@ -1,0 +1,9 @@
+/ {
+  behaviors {
+    slow_dpi: behavior_slow_dpi {
+      compatible = "zmk,behavior-sensor-config";
+      label = "SLOW_DPI";
+      bindings = <&trackball_sensor 400>; // センサー名はあとで確認しよう！
+    };
+  };
+};
