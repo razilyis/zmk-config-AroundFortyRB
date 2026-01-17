@@ -2,8 +2,6 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: razilyis
-      url-base: https://github.com/razilyis
     - name: badjeff
       url-base: https://github.com/badjeff
     - name: caksoylar
@@ -16,7 +14,6 @@ manifest:
     - name: zmk-pmw3610-driver
       remote: badjeff
       revision: main
-
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
