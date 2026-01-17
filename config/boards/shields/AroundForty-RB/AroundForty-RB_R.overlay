@@ -68,7 +68,7 @@
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
         cpi = <400>;
-        /* invert-x; property might be needed if mouse is inverted */
+        invert-x;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 };
