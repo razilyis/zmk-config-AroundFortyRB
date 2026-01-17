@@ -1,6 +1,7 @@
 #include "AroundForty-RB.dtsi"
 #include <dt-bindings/zmk/pointing.h>
 #include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 
 &default_transform {
@@ -63,6 +64,7 @@
         compatible = "pixart,pmw3610-alt";
         reg = <0>;
         spi-max-frequency = <2000000>;
+        evt-type = <INPUT_EV_REL>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 };
