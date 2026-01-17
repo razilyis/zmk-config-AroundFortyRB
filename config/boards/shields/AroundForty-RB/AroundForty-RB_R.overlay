@@ -68,11 +68,7 @@
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
         cpi = <400>;
-        scroll-tick = <16>;
-        invert-scroll-x;
-        /* invert-x;  <-- This property might be needed if mouse is inverted, but conf said 'invert-x=y' */
-        /* However, 'invert-x' was deprecated in favor of 'invert-x' property? */
-        /* Let's verify standard properties for pmw3610-alt */
+        /* invert-x; property might be needed if mouse is inverted */
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 };
