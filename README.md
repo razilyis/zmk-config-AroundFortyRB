@@ -3,6 +3,8 @@
 
 Around Forty RightBallのファームウェアです。
 
+-Zmkfirmware v0.3に対応。（tsunoshuu様、感謝します）
+
 -Prospector Scannerに対応
 
 -ZMK Studioに対応
