@@ -70,6 +70,7 @@
         cpi = <400>;
         invert-x;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        force-awake;
     };
 };
 
