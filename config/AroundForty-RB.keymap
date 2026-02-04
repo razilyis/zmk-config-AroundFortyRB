@@ -1,4 +1,4 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+
 #define MOUSE 6
 
 #include <behaviors/rgbled_widget.dtsi>  // needed to use the behaviors
@@ -63,7 +63,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        Mac-Default_Layer {
+        Mac-Default_Layer { // 0
             bindings = <
 &kp Q             &kp W         &kp E         &kp R                      &kp T                              &kp Y        &kp U        &kp I          &kp O       &kp P
 &kp A             &kp S         &kp D         &kp F                      &kp G                              &kp H        &kp J        &kp K          &kp L       &kp MINUS
@@ -72,7 +72,7 @@
             >;
         };
 
-        Win-Default_Layer {
+        Win-Default_Layer { // 1
             bindings = <
 &kp Q             &kp W         &kp E         &kp R                      &kp T                          &kp Y        &kp U        &kp I          &kp O       &kp P
 &kp A             &kp S         &kp D         &kp F                      &kp G                          &kp H        &kp J        &kp K          &kp L       &kp MINUS
@@ -81,7 +81,8 @@
             >;
         };
 
-        Mac-Function_Layer {
+        Mac-Function_Layer { // 2
+
             bindings = <
 &kp LG(A)  &kp LG(X)     &kp LG(C)    &kp LG(V)  &kp LG(F)          &kp LESS_THAN         &kp GREATER_THAN       &kp CARET        &kp PERCENT    &kp DOLLAR
 &kp TAB    &kp LEFT_GUI  &kp LS(TAB)  &mkp MB1   &mkp MB2           &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AT_SIGN      &kp AMPERSAND  &kp DOUBLE_QUOTES
@@ -92,7 +93,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        Win-Function_Layer {
+        Win-Function_Layer { // 3
             bindings = <
 &kp LC(A)  &kp LC(X)     &kp LC(C)    &kp LC(V)  &kp LC(LS(V))          &kp LESS_THAN         &kp GREATER_THAN       &kp CARET        &kp PERCENT    &kp DOLLAR
 &kp TAB    &kp LEFT_ALT  &kp LS(TAB)  &mkp MB1   &mkp MB2               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AT_SIGN      &kp AMPERSAND  &kp DOUBLE_QUOTES
@@ -103,7 +104,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        Mac-Common_Layer {
+        Mac-Common_Layer { // 4
             bindings = <
 &kp ESCAPE      &trans        &trans       &kp LG(UP_ARROW)    &trans                       &kp LG(W)        &kp LG(LEFT_ARROW)  &mkp MB3        &kp LG(RIGHT_ARROW)  &kp HOME
 &kp TAB         &kp LEFT_GUI  &kp LS(TAB)  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)          &kp LG(TAB)      &mkp MB1            &kp UP_ARROW    &mkp MB2             &kp PAGE_UP
@@ -114,7 +115,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        Win-Common_Layer {
+        Win-Common_Layer { // 5
             bindings = <
 &kp ESCAPE      &trans        &trans       &kp LG(UP_ARROW)    &trans                       &kp LC(W)          &kp LA(LEFT_ARROW)  &mkp MB3        &kp LA(RIGHT_ARROW)  &kp HOME
 &kp TAB         &kp LEFT_GUI  &kp LS(TAB)  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)          &kp LC(PAGE_UP)    &mkp MB1            &kp UP_ARROW    &mkp MB2             &kp PAGE_UP
@@ -125,7 +126,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        Num_Layer {
+        Num_Layer { // 6
             bindings = <
 &kp F1   &kp F2   &kp F3  &kp F4  &kp F5           &kp PLUS      &kp MINUS   &kp NUMBER_7   &kp NUMBER_8   &kp NUMBER_9
 &kp F6   &kp F7   &kp F8  &kp F9  &kp F10          &kp EQUAL     &kp COLON   &kp N4         &kp N5         &kp N6
@@ -134,7 +135,7 @@
             >;
         };
 
-        Setting_Layer {
+        Setting_Layer { // 7
             bindings = <
 &studio_unlock  &trans  &trans  &trans  &trans         &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
 &trans          &trans  &trans  &trans  &trans         &trans        &trans          &trans        &trans        &trans
@@ -145,7 +146,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        AutoMouse_Layer {
+        AutoMouse_Layer { // 8
             bindings = <
 &trans  &trans  &trans  &trans  &trans          &trans  &trans    &trans    &trans    &trans
 &trans  &trans  &trans  &trans  &trans          &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
