@@ -4,6 +4,7 @@
 Around Forty RightBallのファームウェアです。
 
 Prospector Scannerに対応
+
 ZMK Studioに対応
 
 以下、ご利用ガイドです。
