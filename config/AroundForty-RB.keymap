@@ -32,7 +32,7 @@
         };
 
         scroll_Layer {
-            bindings = <&tog 6>;
+            bindings = <&lt 6 LEFT_SHIFT>;
             key-positions = <28 29>;
         };
     };
