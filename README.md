@@ -3,7 +3,7 @@
 
 Around Forty RightBallのファームウェアです。
 
--Zmkfirmware v0.3に対応。（tsunoshuu様、感謝します）
+-Zmkfirmware v0.3に対応。（tsunoshuu様、PR感謝します）
 
 -PMW3610のドライバを「badjeff/zmk-pmw3610-driver」に変更
 
