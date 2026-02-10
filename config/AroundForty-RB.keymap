@@ -1,6 +1,4 @@
-#define MOUSE 6
-
-#include <behaviors/rgbled_widget.dtsi>  // needed to use the behaviors
+#include <behaviors/rgbled_widget.dtsi>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
@@ -39,8 +37,7 @@
             label = "TO_LAYER_0";
         };
 
-        // Windows用：Alt + Grave (~)
-
+        // Windows用入力切り替え：Alt + Grave (~)
         ime_tog: ime_toggle {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -53,8 +50,7 @@
                 <&kp LALT>;
         };
 
-        // macOS用：Ctrl + Space
-
+        // macOS用入力切り替え：Ctrl + Space
         mac_ime: mac_ime_toggle {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -78,6 +74,7 @@
             tapping-term-ms = <200>;
         };
 
+        // 
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -91,6 +88,7 @@
         compatible = "zmk,keymap";
 
         Win-Base {
+            display-name = "Win-Base";
             bindings = <
 &kp Q             &kp W     &kp E     &kp R                 &kp T                          &kp Y        &kp U        &kp I          &kp O    &kp P
 &kp A             &kp S     &kp D     &kp F                 &kp G                          &kp H        &kp J        &kp K          &kp L    &lt 7 MINUS
@@ -100,6 +98,7 @@
         };
 
         Mac-Base {
+            display-name = "Mac-Base";
             bindings = <
 &kp Q             &kp W         &kp E         &kp R                 &kp T                          &kp Y        &kp U        &kp I          &kp O    &kp P
 &kp A             &kp S         &kp D         &kp F                 &kp G                          &kp H        &kp J        &kp K          &kp L    &lt 7 MINUS
@@ -109,6 +108,7 @@
         };
 
         Win-Fnc {
+            display-name = "Win-Fnc";
             bindings = <
 &kp LC(A)       &kp LC(X)     &kp LC(C)    &kp LC(V)  &kp LC(F)          &kp LESS_THAN         &kp GREATER_THAN       &kp CARET        &kp PERCENT    &kp DOLLAR
 &kp TAB         &kp LEFT_ALT  &kp LS(TAB)  &mkp MB1   &mkp MB2           &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AT_SIGN      &kp AMPERSAND  &kp DOUBLE_QUOTES
@@ -118,6 +118,7 @@
         };
 
         Mac-Fnc {
+            display-name = "Mac-Fnc";
             bindings = <
 &kp LG(A)       &kp LG(X)     &kp LG(C)    &kp LG(V)  &kp LG(F)             &kp LESS_THAN         &kp GREATER_THAN       &kp CARET        &kp PERCENT    &kp DOLLAR
 &kp TAB         &kp LEFT_GUI  &kp LS(TAB)  &mkp MB1   &mkp MB2              &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AT_SIGN      &kp AMPERSAND  &kp DOUBLE_QUOTES
@@ -127,6 +128,7 @@
         };
 
         Win-Common {
+            display-name = "Win-Common";
             bindings = <
 &kp ESC    &trans        &trans       &kp LG(UP_ARROW)    &kp LA(UP_ARROW)                    &kp LC(W)          &kp LA(LEFT_ARROW)  &mkp MB3        &kp LA(RIGHT_ARROW)  &kp HOME
 &kp TAB    &kp LEFT_ALT  &kp LS(TAB)  &kp LG(LEFT_ARROW)  &kp LG(RIGHT_ARROW)                 &kp LC(PAGE_UP)    &mkp MB1            &kp UP_ARROW    &mkp MB2             &kp PAGE_UP
@@ -136,6 +138,7 @@
         };
 
         Mac-Common {
+            display-name = "Mac-Common";
             bindings = <
 &kp ESC    &trans        &trans       &kp LC(UP_ARROW)    &kp LG(UP_ARROW)                           &kp LG(W)        &kp LG(LEFT_ARROW)  &mkp MB3        &kp LG(RIGHT_ARROW)  &kp HOME
 &kp TAB    &kp LEFT_GUI  &kp LS(TAB)  &kp LC(LEFT_ARROW)  &kp LC(RIGHT_ARROW)                        &kp LC(TAB)      &mkp MB1            &kp UP_ARROW    &mkp MB2             &kp PAGE_UP
@@ -163,6 +166,7 @@
         };
 
         Settings {
+            display-name = "Settings";
             bindings = <
 &trans  &trans  &trans  &trans  &trans         &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
 &trans  &trans  &trans  &trans  &trans         &trans        &trans          &trans        &trans        &trans
@@ -172,6 +176,7 @@
         };
 
         AML {
+            display-name = "AML";
             bindings = <
 &trans  &trans  &trans  &trans  &trans          &trans  &trans    &trans    &trans    &trans
 &trans  &trans  &trans  &trans  &trans          &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
