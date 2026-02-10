@@ -18,22 +18,8 @@
         ;
 };
 
+
 / {
-    /*
-     * 将来スクロール方向を変えたくなった時用（X/Y個別反転）
-     * ※今は使わない（scroll-layer側はデフォルト mapper を使用）
-     */
-    zip_xy_to_scroll_mapper_tune: zip_xy_to_scroll_mapper_tune {
-        compatible = "zmk,input-processor-xy-to-scroll";
-        #input-processor-cells = <0>;
-
-        /* 縦スクロール方向を反転（必要になったら有効化） */
-        // scroll-y-invert;
-
-        /* 横スクロール方向を反転（必要になったら有効化） */
-        // scroll-x-invert;
-    };
-
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
