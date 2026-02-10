@@ -4,18 +4,10 @@
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-
-/* ---------------------------------------------------------
- * Default transform
- * --------------------------------------------------------- */
 &default_transform {
     col-offset = <6>;
 };
 
-
-/* ---------------------------------------------------------
- * Key scan (matrix)
- * --------------------------------------------------------- */
 &kscan0 {
     col-gpios
         = <&xiao_d 10 GPIO_ACTIVE_HIGH>
@@ -26,20 +18,10 @@
         ;
 };
 
-
 / {
-    /* =====================================================
-     * Scroll mapper (tunable: X / Y invert switches)
-     * =====================================================
-     * 目的：
-     *   - 今はスクロール方向を変えない
-     *   - 将来、縦 / 横を個別に反転できるようにしておく
-     *
-     * 使い方：
-     *   scroll-layer の input-processors で
-     *     &zip_xy_to_scroll_mapper        → 現在使用中（デフォルト）
-     *     &zip_xy_to_scroll_mapper_tune   → 将来調整用
-     * に切り替える
+    /*
+     * 将来スクロール方向を変えたくなった時用（X/Y個別反転）
+     * ※今は使わない（scroll-layer側はデフォルト mapper を使用）
      */
     zip_xy_to_scroll_mapper_tune: zip_xy_to_scroll_mapper_tune {
         compatible = "zmk,input-processor-xy-to-scroll";
@@ -52,56 +34,30 @@
         // scroll-x-invert;
     };
 
-
-    /* -----------------------------------------------------
-     * Trackball input listener
-     * ----------------------------------------------------- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 通常カーソル用 input processors */
+        /* 通常カーソル用 input processors（要素はカンマ区切り） */
         input-processors =
-            /* X方向のみ反転（筐体都合の補正） */
-            <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>
+            <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
+            <&zip_xy_scaler 1 1>;
+            /* <&zip_temp_layer 9 300>; */
 
-            /* カーソル速度（X, Y） */
-            <&zip_xy_scaler 1 1>
-
-            /* Auto Mouse Layer を使う場合は有効化 */
-            /* <&zip_temp_layer 9 300> */
-            ;
-
-
-        /* -------------------------------------------------
-         * Scroll layer (Layer 6 / 7)
-         * ------------------------------------------------- */
+        /* スクロール用（レイヤー 6 と 7） */
         scroll-layer {
-            layers = <6 7>; /* スクロール用レイヤー */
+            layers = <6 7>;
 
             input-processors =
-                /*
-                 * ▼ 現在使用中（向きは変えない）
-                 */
-                <&zip_xy_to_scroll_mapper>
-
-                /*
-                 * ▼ 将来、向きを変えたくなったら上をコメントアウトして
-                 *    下を有効化し、tuneノードでX/Y反転を切り替える
-                 */
-                /* <&zip_xy_to_scroll_mapper_tune> */
-
-                /* スクロール速度をゆっくりに */
-                <&zip_scroll_scaler 1 45>
-                ;
+                /* ▼ 現在：向きは変えない（デフォルト） */
+                <&zip_xy_to_scroll_mapper>,
+                /* ▼ 将来：向きを変えるなら上を消してこっちに切替 */
+                /* <&zip_xy_to_scroll_mapper_tune>, */
+                <&zip_scroll_scaler 1 45>;
         };
     };
 };
 
-
-/* ---------------------------------------------------------
- * SPI pin control
- * --------------------------------------------------------- */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -121,41 +77,25 @@
     };
 };
 
+&xiao_serial { status = "disabled"; };
 
-/* ---------------------------------------------------------
- * Disable serial
- * --------------------------------------------------------- */
-&xiao_serial {
-    status = "disabled";
-};
-
-
-/* ---------------------------------------------------------
- * SPI + PMW3610 trackball
- * --------------------------------------------------------- */
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
-
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610-alt";
         reg = <0>;
-
         spi-max-frequency = <2000000>;
-
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
-
         cpi = <400>;
-
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         force-awake;
     };
