@@ -41,7 +41,11 @@
         /* 通常カーソル用 input processors（要素はカンマ区切り） */
         input-processors =
             <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
+            /* ▼ カーソル速度のXとYの速度調整。CPIとはまた別 */
             <&zip_xy_scaler 1 1>;
+
+            /* ▼ AutoMouseLayerを無効化しているのでコメント外せば有効になる */
+            /* ▼ 有効の場合はLayer9/300msの設定 */
             /* <&zip_temp_layer 9 300>; */
 
         /* スクロール用（レイヤー 6 と 7） */
@@ -51,8 +55,11 @@
             input-processors =
                 /* ▼ 現在：向きは変えない（デフォルト） */
                 <&zip_xy_to_scroll_mapper>,
+
                 /* ▼ 将来：向きを変えるなら上を消してこっちに切替 */
                 /* <&zip_xy_to_scroll_mapper_tune>, */
+
+                /* ▼ スクロール速度を遅めに設定 */
                 <&zip_scroll_scaler 1 45>;
         };
     };
