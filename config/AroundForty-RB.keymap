@@ -13,17 +13,7 @@
     combos {
         compatible = "zmk,combos";
 
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <10 11>;
-        };
-
-        shift+tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <19 18>;
-        };
-
-        escape {
+        Escape {
             bindings = <&kp ESCAPE>;
             key-positions = <0 1>;
         };
@@ -38,6 +28,7 @@
         };
 
         // Windows用入力切り替え：Alt + Grave (~)
+
         ime_tog: ime_toggle {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -51,6 +42,7 @@
         };
 
         // macOS用入力切り替え：Ctrl + Space
+
         mac_ime: mac_ime_toggle {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -75,6 +67,7 @@
         };
 
         // 
+
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
