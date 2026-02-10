@@ -27,18 +27,18 @@
 };
 
 
- / {
+/ {
     /* =====================================================
      * Scroll mapper (tunable: X / Y invert switches)
      * =====================================================
      * 目的：
-     *   - 今はスクロール方向を変えない（デフォルト mapper を使う）
-     *   - 将来、縦/横の反転をそれぞれ個別にON/OFFできるようにしておく
+     *   - 今はスクロール方向を変えない
+     *   - 将来、縦 / 横を個別に反転できるようにしておく
      *
      * 使い方：
      *   scroll-layer の input-processors で
-     *     &zip_xy_to_scroll_mapper         → 現状（デフォルト）
-     *     &zip_xy_to_scroll_mapper_tune    → 将来調整用
+     *     &zip_xy_to_scroll_mapper        → 現在使用中（デフォルト）
+     *     &zip_xy_to_scroll_mapper_tune   → 将来調整用
      * に切り替える
      */
     zip_xy_to_scroll_mapper_tune: zip_xy_to_scroll_mapper_tune {
@@ -68,23 +68,16 @@
             /* カーソル速度（X, Y） */
             <&zip_xy_scaler 1 1>
 
-            /* AML有効にしたいときは下記を有効化 */
+            /* Auto Mouse Layer を使う場合は有効化 */
             /* <&zip_temp_layer 9 300> */
             ;
 
 
-        /* =================================================
-         * Scroll layers
-         * =================================================
-         * レイヤーごとにスクロール挙動を変える
-         *
-         * Layer 6/7 : 縦横スクロール
-         * Layer 5   : 縦のみスクロール（横は無効化）
+        /* -------------------------------------------------
+         * Scroll layer (Layer 6 / 7)
          * ------------------------------------------------- */
-
-        /* --- Layer 6/7: 縦横スクロール --- */
         scroll-layer {
-            layers = <6 7>; /* スクロールレイヤー */
+            layers = <6 7>; /* スクロール用レイヤー */
 
             input-processors =
                 /*
@@ -96,30 +89,6 @@
                  * ▼ 将来、向きを変えたくなったら上をコメントアウトして
                  *    下を有効化し、tuneノードでX/Y反転を切り替える
                  */
-                /* <&zip_xy_to_scroll_mapper_tune> */
-
-                /* スクロール速度をゆっくりに */
-                <&zip_scroll_scaler 1 45>
-                ;
-        };
-
-        /* --- Layer 5: 縦のみスクロール（横を殺す） --- */
-        scroll-layer {
-            layers = <5>; /* 縦専用スクロールレイヤー */
-
-            input-processors =
-                /*
-                 * 横スクロールを無効化するため、
-                 * スクロール変換前に X成分を 0倍（=0）にする
-                 *   X倍率=0, Y倍率=1
-                 */
-                <&zip_xy_scaler 0 1>
-
-                /*
-                 * スクロール変換（向きはデフォルト）
-                 * ※向きを変えたくなったら、下のtune版に差し替え可能
-                 */
-                <&zip_xy_to_scroll_mapper>
                 /* <&zip_xy_to_scroll_mapper_tune> */
 
                 /* スクロール速度をゆっくりに */
