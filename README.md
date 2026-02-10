@@ -15,6 +15,8 @@ mainブランチで実装済み
 
 🟢全角半角の切り替えマクロ：全角半角のトグルが一つのキーで可能
 
+🟡Prospector Scannerの対応はいったん見送っています　/ ※Bluetooth接続が不安定になるため
+
 以下、ご利用ガイドです。
 
 https://note.com/razily/n/n0b3c5ff58d92
