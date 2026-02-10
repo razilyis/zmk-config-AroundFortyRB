@@ -2,10 +2,13 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: badjeff
+    # PMW3610センサーモジュール
+    - name: badjeff≈
       url-base: https://github.com/badjeff
+    # RGB Widgetモジュール
     - name: caksoylar
       url-base: https://github.com/caksoylar
+    # Prospepctor Scannerモジュール
     - name: prospector
       url-base: https://github.com/t-ogura
   projects:
