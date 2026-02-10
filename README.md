@@ -1,7 +1,11 @@
 # zmk-config-AroundFortyRB
 
 
-Around Forty RightBallのファームウェアです。
+Around Forty RBのファームウェアです。
+
+-------------------------------------------------------------------------
+mainブランチで実装済み
+-------------------------------------------------------------------------
 
 🟢Zmkfirmware v0.3に対応。（tsunoshuu様、PR感謝します）
 
@@ -11,5 +15,8 @@ Around Forty RightBallのファームウェアです。
 
 🟢ZMK Studioに対応
 
+🟢全角半角の切り替えマクロ：全角半角のトグルが一つのキーで可能
+
 以下、ご利用ガイドです。
+
 https://note.com/razily/n/n0b3c5ff58d92
