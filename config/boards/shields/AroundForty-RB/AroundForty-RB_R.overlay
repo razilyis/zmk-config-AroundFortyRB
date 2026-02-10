@@ -25,7 +25,7 @@
         device = <&trackball>;
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
                            //カーソルの縦と横の速度をそれぞれ設定できます
-                           <&zip_xy_scaler 1 1>,
+                           <&zip_xy_scaler 1 1>;
                            //AML有効にしたいときは下記先頭のコメント「//」を外してください
                            //<&zip_temp_layer 9 300>;
         scroll-layer {
