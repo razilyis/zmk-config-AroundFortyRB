@@ -24,13 +24,14 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
+                           //カーソルの縦と横の速度をそれぞれ設定できます
                            <&zip_xy_scaler 1 1>;
-//                         AML有効にしたいときはコメントを外してください
-//                         <&zip_temp_layer 9 300>;
+                           //AML有効にしたいときは下記先頭のコメント「//」を外してください
+                           //<&zip_temp_layer 9 300>;
         scroll-layer {
-            layers = <6 7>;
+            layers = <6 7>; //スクロールレイヤー６と７を指定しています
             input-processors = <&zip_xy_to_scroll_mapper>, 
-            <&zip_scroll_scaler 1 45>;
+                               <&zip_scroll_scaler 1 45>; //スクロール速度をゆっくりに設定しています
         };
     };
 };
