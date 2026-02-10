@@ -5,77 +5,189 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 
+/* ---------------------------------------------------------
+ * Default transform
+ * --------------------------------------------------------- */
 &default_transform {
     col-offset = <6>;
 };
 
+
+/* ---------------------------------------------------------
+ * Key scan (matrix)
+ * --------------------------------------------------------- */
 &kscan0 {
-        col-gpios
-            = <&xiao_d 10 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 9 GPIO_ACTIVE_HIGH> 
-            , <&xiao_d 8 GPIO_ACTIVE_HIGH> 
-            , <&xiao_d 7 GPIO_ACTIVE_HIGH> 
-            , <&gpio0 10 GPIO_ACTIVE_HIGH>
-            ;
+    col-gpios
+        = <&xiao_d 10 GPIO_ACTIVE_HIGH>
+        , <&xiao_d  9 GPIO_ACTIVE_HIGH>
+        , <&xiao_d  8 GPIO_ACTIVE_HIGH>
+        , <&xiao_d  7 GPIO_ACTIVE_HIGH>
+        , <&gpio0  10 GPIO_ACTIVE_HIGH>
+        ;
 };
 
-/ {
+
+ / {
+    /* =====================================================
+     * Scroll mapper (tunable: X / Y invert switches)
+     * =====================================================
+     * 目的：
+     *   - 今はスクロール方向を変えない（デフォルト mapper を使う）
+     *   - 将来、縦/横の反転をそれぞれ個別にON/OFFできるようにしておく
+     *
+     * 使い方：
+     *   scroll-layer の input-processors で
+     *     &zip_xy_to_scroll_mapper         → 現状（デフォルト）
+     *     &zip_xy_to_scroll_mapper_tune    → 将来調整用
+     * に切り替える
+     */
+    zip_xy_to_scroll_mapper_tune: zip_xy_to_scroll_mapper_tune {
+        compatible = "zmk,input-processor-xy-to-scroll";
+        #input-processor-cells = <0>;
+
+        /* 縦スクロール方向を反転（必要になったら有効化） */
+        // scroll-y-invert;
+
+        /* 横スクロール方向を反転（必要になったら有効化） */
+        // scroll-x-invert;
+    };
+
+
+    /* -----------------------------------------------------
+     * Trackball input listener
+     * ----------------------------------------------------- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
-                           <&zip_xy_scaler 1 1>;
-//                         AML有効にしたいときはコメントを外してください
-//                         <&zip_temp_layer 9 300>;
+
+        /* 通常カーソル用 input processors */
+        input-processors =
+            /* X方向のみ反転（筐体都合の補正） */
+            <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>
+
+            /* カーソル速度（X, Y） */
+            <&zip_xy_scaler 1 1>
+
+            /* AML有効にしたいときは下記を有効化 */
+            /* <&zip_temp_layer 9 300> */
+            ;
+
+
+        /* =================================================
+         * Scroll layers
+         * =================================================
+         * レイヤーごとにスクロール挙動を変える
+         *
+         * Layer 6/7 : 縦横スクロール
+         * Layer 5   : 縦のみスクロール（横は無効化）
+         * ------------------------------------------------- */
+
+        /* --- Layer 6/7: 縦横スクロール --- */
         scroll-layer {
-            layers = <6 7>;
-            input-processors = <&zip_xy_to_scroll_mapper>, 
-            <&zip_scroll_scaler 1 45>;
+            layers = <6 7>; /* スクロールレイヤー */
+
+            input-processors =
+                /*
+                 * ▼ 現在使用中（向きは変えない）
+                 */
+                <&zip_xy_to_scroll_mapper>
+
+                /*
+                 * ▼ 将来、向きを変えたくなったら上をコメントアウトして
+                 *    下を有効化し、tuneノードでX/Y反転を切り替える
+                 */
+                /* <&zip_xy_to_scroll_mapper_tune> */
+
+                /* スクロール速度をゆっくりに */
+                <&zip_scroll_scaler 1 45>
+                ;
+        };
+
+        /* --- Layer 5: 縦のみスクロール（横を殺す） --- */
+        scroll-layer {
+            layers = <5>; /* 縦専用スクロールレイヤー */
+
+            input-processors =
+                /*
+                 * 横スクロールを無効化するため、
+                 * スクロール変換前に X成分を 0倍（=0）にする
+                 *   X倍率=0, Y倍率=1
+                 */
+                <&zip_xy_scaler 0 1>
+
+                /*
+                 * スクロール変換（向きはデフォルト）
+                 * ※向きを変えたくなったら、下のtune版に差し替え可能
+                 */
+                <&zip_xy_to_scroll_mapper>
+                /* <&zip_xy_to_scroll_mapper_tune> */
+
+                /* スクロール速度をゆっくりに */
+                <&zip_scroll_scaler 1 45>
+                ;
         };
     };
 };
 
+
+/* ---------------------------------------------------------
+ * SPI pin control
+ * --------------------------------------------------------- */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                <NRF_PSEL(SPIM_MISO, 0, 4)>;
+            psels = <NRF_PSEL(SPIM_SCK,  0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
         };
     };
 
     spi0_sleep: spi0_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                <NRF_PSEL(SPIM_MISO, 0, 4)>;
+            psels = <NRF_PSEL(SPIM_SCK,  0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
             low-power-enable;
         };
     };
 };
 
-&xiao_serial { status = "disabled"; };
 
+/* ---------------------------------------------------------
+ * Disable serial
+ * --------------------------------------------------------- */
+&xiao_serial {
+    status = "disabled";
+};
+
+
+/* ---------------------------------------------------------
+ * SPI + PMW3610 trackball
+ * --------------------------------------------------------- */
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
+
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
+
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610-alt";
         reg = <0>;
+
         spi-max-frequency = <2000000>;
+
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
+
         cpi = <400>;
+
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         force-awake;
     };
 };
-
-
