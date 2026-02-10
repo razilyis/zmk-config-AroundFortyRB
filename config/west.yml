@@ -3,7 +3,7 @@ manifest:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
     # PMW3610センサーモジュール
-    - name: badjeff≈
+    - name: badjeff
       url-base: https://github.com/badjeff
     # RGB Widgetモジュール
     - name: caksoylar
