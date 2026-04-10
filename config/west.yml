@@ -2,9 +2,12 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    # PAW3222センサーモジュール
+    - name: razilyis
+      url-base: https://github.com/razilyis
     # PMW3610センサーモジュール
-    - name: badjeff
-      url-base: https://github.com/badjeff
+    # - name: badjeff
+    #   url-base: https://github.com/badjeff
     # RGB Widgetモジュール
     - name: caksoylar
       url-base: https://github.com/caksoylar
@@ -13,9 +16,12 @@ manifest:
       remote: zmkfirmware
       revision: v0.3.0
       import: app/west.yml
-    - name: zmk-pmw3610-driver
-      remote: badjeff
-      revision: zmk-0.3
+    - name: zmk-driver-paw3222
+      remote: razilyis
+      revision: main
+    # - name: zmk-pmw3610-driver
+    #   remote: badjeff
+    #   revision: zmk-0.3
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: v0.3-branch
